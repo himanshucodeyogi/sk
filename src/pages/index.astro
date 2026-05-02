@@ -348,13 +348,15 @@ import Videos from '../components/Videos.astro';
 	// Confetti Effect
 	import confetti from 'https://cdn.skypack.dev/canvas-confetti';
 	
+	const colors = ['#FDB913', '#FFD54F', '#FFFFFF', '#0B2239'];
+
 	function fireConfetti() {
-		confetti({
-			particleCount: 150,
-			spread: 70,
-			origin: { y: 0.6 },
-			colors: ['#FDB913', '#FFFFFF', '#0B2239']
-		});
+		// Center burst
+		confetti({ particleCount: 100, spread: 70, origin: { x: 0.5, y: 0.55 }, colors });
+		// Top-left cannon
+		confetti({ particleCount: 80, angle: 55,  spread: 60, origin: { x: 0, y: 0.1 }, colors, gravity: 1.2 });
+		// Top-right cannon
+		confetti({ particleCount: 80, angle: 125, spread: 60, origin: { x: 1, y: 0.1 }, colors, gravity: 1.2 });
 	}
 
 	// Fire on load
