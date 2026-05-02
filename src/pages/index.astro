@@ -1,0 +1,367 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import StudentGallery from '../components/StudentGallery.astro';
+import Notes from '../components/Notes.astro';
+import Videos from '../components/Videos.astro';
+---
+
+<Layout title="Happy Birthday SK Chaudhary Sir | CodeYogi Tribute">
+	<!-- Premium Navbar -->
+	<nav class="site-nav" id="site-nav">
+		<div class="container nav-inner">
+			<a href="#" class="nav-logo">
+				Code<span>Yogi</span>
+			</a>
+
+			<div class="nav-links">
+				<a href="#" class="nav-link active">Home</a>
+				<a href="#gallery" class="nav-link">Gallery</a>
+				<a href="#notes" class="nav-link">Notes</a>
+				<a href="#videos" class="nav-link">Videos</a>
+			</div>
+
+			<div class="nav-actions">
+				<a href="#gallery" class="nav-cta">
+					<span>🎂</span> Explore
+				</a>
+			</div>
+
+			<button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
+		</div>
+
+		<!-- Mobile Menu -->
+		<div class="mobile-menu" id="mobile-menu">
+			<a href="#" class="mobile-link">Home</a>
+			<a href="#gallery" class="mobile-link">Gallery</a>
+			<a href="#notes" class="mobile-link">Notes</a>
+			<a href="#videos" class="mobile-link">Videos</a>
+		</div>
+	</nav>
+
+	<main>
+		<Hero />
+		<hr class="section-divider" />
+		<Videos />
+		<hr class="section-divider" />
+		<Notes />
+
+		<!-- Final Wish Section -->
+		<section class="final-wish">
+			<div class="wish-bg"></div>
+			<div class="container animate-fade-in" style="position: relative; z-index: 1;">
+				<div class="wish-badge">🎉 A Heartfelt Wish</div>
+				<h2 class="wish-title">Once Again, <br /><span class="text-gradient-gold">Happy Birthday Sir!</span></h2>
+				<p class="wish-text">
+					Your vision and dedication have changed countless lives. Today we celebrate the incredible person you are.
+				</p>
+				<div class="wish-emojis">
+					<span class="animate-float" style="animation-delay: 0s;">🎂</span>
+					<span class="animate-float" style="animation-delay: 0.5s;">🎉</span>
+					<span class="animate-float" style="animation-delay: 1s;">🎈</span>
+					<span class="animate-float" style="animation-delay: 1.5s;">🥳</span>
+					<span class="animate-float" style="animation-delay: 2s;">🎁</span>
+				</div>
+			</div>
+		</section>
+		<hr class="section-divider" />
+		<StudentGallery />
+	</main>
+</Layout>
+
+<style>
+	/* ─── Navbar ─── */
+	.site-nav {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		background: rgba(6, 21, 37, 0.85);
+		backdrop-filter: blur(24px) saturate(1.5);
+		-webkit-backdrop-filter: blur(24px) saturate(1.5);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+		transition: var(--transition);
+	}
+
+	.nav-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+	}
+
+	.nav-logo {
+		font-family: var(--font-serif);
+		font-size: 1.6rem;
+		font-weight: 700;
+		color: white;
+		letter-spacing: -0.01em;
+	}
+
+	.nav-logo span {
+		color: var(--color-gold);
+	}
+
+	.nav-links {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.nav-link {
+		color: rgba(255, 255, 255, 0.6);
+		font-size: 0.85rem;
+		font-weight: 500;
+		padding: 0.5rem 1rem;
+		border-radius: var(--radius-full);
+		transition: var(--transition-fast);
+		letter-spacing: 0.02em;
+	}
+
+	.nav-link:hover,
+	.nav-link.active {
+		color: white;
+		background: rgba(255, 255, 255, 0.08);
+	}
+
+	.nav-cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+		color: var(--color-navy-dark);
+		font-size: 0.85rem;
+		font-weight: 700;
+		padding: 0.6rem 1.5rem;
+		border-radius: var(--radius-full);
+		box-shadow: var(--shadow-gold);
+		transition: var(--transition);
+	}
+
+	.nav-cta:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 12px 40px rgba(253, 185, 19, 0.35);
+	}
+
+	@media (max-width: 1024px) {
+		.nav-links {
+			gap: 0.25rem;
+		}
+		.nav-link {
+			padding: 0.5rem 0.75rem;
+			font-size: 0.8rem;
+		}
+	}
+
+	.site-nav.scrolled {
+		padding-top: 0;
+		padding-bottom: 0;
+		background: rgba(6, 21, 37, 0.98);
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+		border-bottom-color: rgba(253, 185, 19, 0.1);
+	}
+
+	.site-nav.scrolled .nav-inner {
+		padding-top: 0.75rem;
+		padding-bottom: 0.75rem;
+	}
+
+	/* Hamburger */
+	.nav-toggle {
+		display: none;
+		flex-direction: column;
+		gap: 5px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0.5rem;
+	}
+
+	.nav-toggle span {
+		display: block;
+		width: 22px;
+		height: 2px;
+		background: white;
+		border-radius: 2px;
+		transition: var(--transition-fast);
+	}
+
+	/* Mobile Menu */
+	.mobile-menu {
+		display: none;
+		flex-direction: column;
+		padding: 0 2rem 1.5rem;
+		gap: 0.25rem;
+	}
+
+	.mobile-link {
+		color: rgba(255, 255, 255, 0.7);
+		font-size: 0.95rem;
+		font-weight: 500;
+		padding: 0.75rem 1rem;
+		border-radius: var(--radius-sm);
+		transition: var(--transition-fast);
+	}
+
+	.mobile-link:hover {
+		color: white;
+		background: rgba(255, 255, 255, 0.06);
+	}
+
+	@media (max-width: 768px) {
+		.nav-links,
+		.nav-cta {
+			display: none;
+		}
+
+		.nav-toggle {
+			display: flex;
+		}
+
+		.mobile-menu {
+			max-height: 0;
+			overflow: hidden;
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			opacity: 0;
+			transform: translateY(-10px);
+			padding: 0;
+		}
+
+		.mobile-menu.open {
+			max-height: 300px;
+			opacity: 1;
+			transform: translateY(0);
+			padding: 0.5rem 2rem 2rem;
+			display: flex;
+		}
+	}
+
+	/* ─── Final Wish ─── */
+	.final-wish {
+		background: var(--color-cream);
+		padding: 8rem 0;
+		text-align: center;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.wish-bg {
+		position: absolute;
+		inset: 0;
+		background: 
+			radial-gradient(ellipse at 30% 50%, rgba(253, 185, 19, 0.08) 0%, transparent 60%),
+			radial-gradient(ellipse at 70% 50%, rgba(11, 34, 57, 0.04) 0%, transparent 60%);
+		pointer-events: none;
+	}
+
+	.wish-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		background: linear-gradient(135deg, rgba(253, 185, 19, 0.12), rgba(253, 185, 19, 0.04));
+		border: 1px solid rgba(253, 185, 19, 0.2);
+		color: var(--color-gold-dark);
+		font-size: 0.85rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		padding: 0.5rem 1.5rem;
+		border-radius: var(--radius-full);
+		margin-bottom: 2rem;
+	}
+
+	.wish-title {
+		font-size: clamp(2.5rem, 6vw, 4.5rem);
+		margin-bottom: 1.5rem;
+		letter-spacing: -0.02em;
+		color: var(--color-navy);
+	}
+
+	.wish-text {
+		font-size: 1.15rem;
+		color: var(--color-text-secondary);
+		max-width: 560px;
+		margin: 0 auto 3rem;
+		line-height: 1.7;
+	}
+
+	.wish-emojis {
+		display: flex;
+		justify-content: center;
+		gap: 1.5rem;
+		font-size: 2.5rem;
+	}
+
+	@media (max-width: 768px) {
+		.final-wish {
+			padding: 5rem 0;
+		}
+		.wish-text {
+			font-size: 1rem;
+		}
+		.wish-emojis {
+			gap: 1rem;
+			font-size: 2rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.final-wish {
+			padding: 3.5rem 0;
+		}
+		.wish-emojis {
+			gap: 0.75rem;
+			font-size: 1.6rem;
+		}
+	}
+</style>
+
+<script>
+	// Mobile menu toggle
+	const toggle = document.getElementById('nav-toggle');
+	const menu = document.getElementById('mobile-menu');
+	
+	toggle?.addEventListener('click', () => {
+		menu?.classList.toggle('open');
+	});
+
+	// Close mobile menu on link click
+	document.querySelectorAll('.mobile-link').forEach(link => {
+		link.addEventListener('click', () => {
+			menu?.classList.remove('open');
+		});
+	});
+
+	// Navbar scroll effect
+	const nav = document.getElementById('site-nav');
+	window.addEventListener('scroll', () => {
+		if (window.scrollY > 50) {
+			nav?.classList.add('scrolled');
+		} else {
+			nav?.classList.remove('scrolled');
+		}
+	});
+
+	// Confetti Effect
+	import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+	
+	function fireConfetti() {
+		confetti({
+			particleCount: 150,
+			spread: 70,
+			origin: { y: 0.6 },
+			colors: ['#FDB913', '#FFFFFF', '#0B2239']
+		});
+	}
+
+	// Fire on load
+	window.addEventListener('load', () => {
+		setTimeout(fireConfetti, 1000);
+	});
+
+	// Fire on final wish click
+	document.querySelector('.final-wish')?.addEventListener('click', fireConfetti);
+</script>

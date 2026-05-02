@@ -1,0 +1,130 @@
+---
+const videos = [
+  {
+    src: "/birthday-video.mp4",
+    title: "Birthday Celebration 2026",
+    meta: "By CodeYogi Students",
+  },
+  {
+    src: "/sneha-video.mp4",
+    title: "Wish from Sneha",
+    meta: "Batch 2026",
+  },
+];
+---
+<section id="videos" class="videos-section relative overflow-hidden">
+  <div class="video-bg-accent"></div>
+
+  <div class="container relative z-10">
+    <div class="section-header animate-fade-in">
+      <div class="section-badge">
+        <span>🎬</span> Cinema of Wishes
+      </div>
+      <h2 class="section-title">Video <span class="text-gradient-gold">Tributes</span></h2>
+      <p class="section-subtitle">
+        Watch the heartfelt messages and birthday wishes recorded by students from the CodeYogi family.
+      </p>
+    </div>
+
+    <div class="video-grid animate-fade-in delay-2">
+      {videos.map((v) => (
+        <div class="video-card glass-card">
+          <div class="video-wrapper">
+            <video
+              src={v.src}
+              controls
+              preload="metadata"
+              playsinline
+            />
+          </div>
+          <div class="video-info">
+            <h3 class="video-title">{v.title}</h3>
+            <p class="video-meta">{v.meta}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .videos-section {
+    background: #fdfcf6;
+    padding-bottom: 9rem;
+  }
+
+  .video-bg-accent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(253, 185, 19, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    gap: 2.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .video-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 1rem;
+    min-width: 0;
+    transition: var(--transition);
+  }
+
+  .video-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .video-wrapper {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: #000;
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+
+  .video-wrapper video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
+
+  .video-info {
+    padding: 1.25rem 0.5rem 0.5rem;
+  }
+
+  .video-title {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: 0.25rem;
+  }
+
+  .video-meta {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .video-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .video-card {
+      border-radius: var(--radius-lg);
+    }
+  }
+</style>

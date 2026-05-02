@@ -1,0 +1,333 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="A heartfelt birthday tribute to SK Chaudhary Sir from the CodeYogi family." />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+
+		<!-- Lightbox -->
+		<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+			<div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+			<button class="lightbox-close" id="lightbox-close" aria-label="Close">✕</button>
+			<div class="lightbox-content">
+				<img id="lightbox-img" src="" alt="" />
+			</div>
+		</div>
+
+		<!-- Premium Footer -->
+		<footer class="site-footer">
+			<div class="footer-glow"></div>
+			<div class="container">
+				<!-- Footer Top -->
+				<div class="footer-top">
+					<div class="footer-brand">
+						<div class="footer-logo">
+							Code<span>Yogi</span>
+						</div>
+						<p class="footer-tagline">Empowering the next generation of developers with passion, purpose, and perseverance.</p>
+					</div>
+
+					<div class="footer-links">
+						<div class="footer-link-group">
+							<h4>Quick Links</h4>
+							<a href="#">Home</a>
+							<a href="#gallery">Gallery</a>
+							<a href="#notes">Notes</a>
+							<a href="#videos">Videos</a>
+						</div>
+						<div class="footer-link-group">
+							<h4>Connect</h4>
+							<a href="https://codeyogi.org" target="_blank" rel="noopener">codeyogi.org</a>
+							<a href="#">Instagram</a>
+							<a href="#">LinkedIn</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Divider -->
+				<div class="footer-divider"></div>
+
+				<!-- Footer Bottom -->
+				<div class="footer-bottom">
+					<p class="footer-made">Made with <span class="heart">❤️</span> by <strong>CodeYogi Students</strong></p>
+					<p class="footer-copy">© 2026 Birthday Tribute. Crafted with love and gratitude.</p>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	html {
+		scroll-behavior: smooth;
+	}
+
+	/* ─── Lightbox ─── */
+	.lightbox {
+		position: fixed;
+		inset: 0;
+		z-index: 9999;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.3s ease;
+	}
+
+	.lightbox.active {
+		opacity: 1;
+		pointer-events: all;
+	}
+
+	.lightbox-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(6, 21, 37, 0.92);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+	}
+
+	.lightbox-content {
+		position: relative;
+		z-index: 1;
+		transform: scale(0.9);
+		transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+		line-height: 0;
+	}
+
+	.lightbox.active .lightbox-content {
+		transform: scale(1);
+	}
+
+	.lightbox-content img {
+		display: block;
+		max-width: 90vw;
+		max-height: 90vh;
+		width: auto;
+		height: auto;
+		border-radius: 12px;
+		box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+	}
+
+	.lightbox-close {
+		position: absolute;
+		top: 1.25rem;
+		right: 1.25rem;
+		z-index: 2;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.12);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		color: white;
+		font-size: 1.1rem;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.2s ease;
+		backdrop-filter: blur(10px);
+	}
+
+	.lightbox-close:hover {
+		background: rgba(255, 255, 255, 0.25);
+		transform: scale(1.1);
+	}
+
+	[data-lightbox] {
+		cursor: zoom-in;
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		var lightbox   = document.getElementById('lightbox');
+		var lbImg      = document.getElementById('lightbox-img');
+		var closeBtn   = document.getElementById('lightbox-close');
+		var backdrop   = document.getElementById('lightbox-backdrop');
+
+		function openLightbox(src, alt) {
+			lbImg.src = src;
+			lbImg.alt = alt || '';
+			lightbox.classList.add('active');
+			lightbox.setAttribute('aria-hidden', 'false');
+			document.body.style.overflow = 'hidden';
+		}
+
+		function closeLightbox() {
+			lightbox.classList.remove('active');
+			lightbox.setAttribute('aria-hidden', 'true');
+			document.body.style.overflow = '';
+			setTimeout(function () { lbImg.src = ''; }, 300);
+		}
+
+		document.addEventListener('click', function (e) {
+			var target = e.target.closest('[data-lightbox]');
+			if (!target) return;
+			var src = target.getAttribute('data-lightbox');
+			var alt = target.getAttribute('data-lightbox-alt');
+			if (src) openLightbox(src, alt);
+		});
+
+		closeBtn.addEventListener('click', closeLightbox);
+		backdrop.addEventListener('click', closeLightbox);
+
+		document.addEventListener('keydown', function (e) {
+			if (e.key === 'Escape') closeLightbox();
+		});
+	})();
+</script>
+
+<style>
+	/* ─── Footer ─── */
+	.site-footer {
+		background: var(--color-navy-dark);
+		color: white;
+		padding: 4rem 0 2rem;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.footer-glow {
+		position: absolute;
+		top: -100px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 600px;
+		height: 200px;
+		background: radial-gradient(ellipse, rgba(253, 185, 19, 0.08) 0%, transparent 70%);
+		pointer-events: none;
+	}
+
+	.footer-top {
+		display: flex;
+		justify-content: space-between;
+		gap: 3rem;
+		margin-bottom: 3rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.footer-brand {
+		max-width: 350px;
+	}
+
+	.footer-logo {
+		font-family: var(--font-serif);
+		font-size: 1.8rem;
+		font-weight: 700;
+		margin-bottom: 0.75rem;
+		color: white;
+	}
+
+	.footer-logo span {
+		color: var(--color-gold);
+	}
+
+	.footer-tagline {
+		color: rgba(255, 255, 255, 0.5);
+		font-size: 0.95rem;
+		line-height: 1.7;
+	}
+
+	.footer-links {
+		display: flex;
+		gap: 4rem;
+	}
+
+	.footer-link-group h4 {
+		font-family: var(--font-sans);
+		font-size: 0.8rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--color-gold);
+		margin-bottom: 1.25rem;
+	}
+
+	.footer-link-group a {
+		display: block;
+		color: rgba(255, 255, 255, 0.55);
+		font-size: 0.9rem;
+		padding: 0.35rem 0;
+		transition: var(--transition-fast);
+	}
+
+	.footer-link-group a:hover {
+		color: white;
+		transform: translateX(4px);
+	}
+
+	.footer-divider {
+		height: 1px;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+		margin-bottom: 2rem;
+	}
+
+	.footer-bottom {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.footer-made {
+		font-size: 0.9rem;
+		color: rgba(255, 255, 255, 0.7);
+	}
+
+	.footer-made .heart {
+		display: inline-block;
+		animation: heartbeat 1.5s ease-in-out infinite;
+	}
+
+	.footer-made strong {
+		color: var(--color-gold);
+		font-weight: 600;
+	}
+
+	.footer-copy {
+		font-size: 0.8rem;
+		color: rgba(255, 255, 255, 0.35);
+	}
+
+	@keyframes heartbeat {
+		0%, 100% { transform: scale(1); }
+		50% { transform: scale(1.2); }
+	}
+
+	@media (max-width: 768px) {
+		.footer-top {
+			flex-direction: column;
+			gap: 2.5rem;
+		}
+
+		.footer-links {
+			gap: 2.5rem;
+		}
+
+		.footer-bottom {
+			flex-direction: column;
+			gap: 0.5rem;
+			text-align: center;
+		}
+	}
+</style>

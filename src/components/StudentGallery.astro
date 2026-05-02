@@ -1,0 +1,308 @@
+---
+const students = [
+  { id: 1, name: "Laiba", batch: "Batch 2026", img: "https://i.ibb.co/vvm9Hm97/20260502-153902.jpg" },
+  { id: 2, name: "Payal", batch: "Batch 2026", img: "https://i.ibb.co/XffKnWZr/20260502-154218.jpg" },
+  { id: 3, name: "Anshul sain", batch: "Batch 2026", img: "https://i.ibb.co/ccLcYfxj/20260502-154355.jpg" },
+  { id: 4, name: "Ilma malik", batch: "Batch 2026", img: "https://i.ibb.co/bjGm2mzz/20260502-154512.jpg" },
+  { id: 5,  name: "Anjali Dhiman",    batch: "Batch 2026", img: "https://i.ibb.co/tMpV9GC3/20260502-171324.jpg" },
+  { id: 6,  name: "Priyanshi Ror",    batch: "Batch 2026", img: "https://i.ibb.co/xt7Mh6gN/20260502-154843.jpg" },
+  { id: 7,  name: "Rajat",            batch: "Batch 2026", img: "https://i.ibb.co/mCPBRDGR/20260502-160134.jpg" },
+  { id: 8,  name: "Abdul Chauhan",    batch: "Batch 2026", img: "https://i.ibb.co/NgNGjWTF/20260502-160440.jpg" },
+  { id: 9,  name: "Sneha Saini",      batch: "Batch 2026", img: "https://i.ibb.co/fdkZnypK/20260502-160630.jpg" },
+  { id: 10, name: "Rishu Khalid",     batch: "Batch 2026", img: "https://i.ibb.co/S70Td6Hm/20260502-160803.jpg" },
+  { id: 11, name: "Arjun Dhiman",     batch: "Batch 2026", img: "https://i.ibb.co/TBsbPsz7/20260502-160938.jpg" },
+  { id: 12, name: "Mohan Sain",       batch: "Batch 2026", img: "https://i.ibb.co/MkX9mMD1/20260502-171840.jpg" },
+  { id: 13, name: "Himanshu Kashyap", batch: "Batch 2026", img: "https://i.ibb.co/m5h15ZmP/IMG-20260428-WA0003.jpg" },
+];
+---
+<section id="gallery" class="gallery-section bg-mesh-light">
+  <div class="container">
+    <div class="section-header animate-fade-in">
+      <div class="section-badge">
+        <span>📸</span> Memory Lane
+      </div>
+      <h2 class="section-title">Student <span class="text-gradient-gold">Gallery</span></h2>
+      <p class="section-subtitle">
+        A collection of smiles and memories from the students whose lives you've touched and transformed through CodeYogi.
+      </p>
+    </div>
+    
+    <div class="gallery-grid">
+      {students.map((student, index) => (
+        <div class={`gallery-item animate-scale delay-${(index % 4) + 1}`}>
+          <div class="student-card">
+            <div class="image-box" data-lightbox={student.img} data-lightbox-alt={student.name}>
+              <img src={student.img} alt={student.name} loading="lazy" />
+              <div class="image-overlay">
+                <span class="view-btn">View</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="student-name">{student.name}</h3>
+              <p class="student-batch">{student.batch}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Large Feature Card -->
+    <div class="collage-container animate-fade-in delay-3">
+      <div class="collage-card glass-card">
+        <div class="collage-visual">
+          <img src="https://i.ibb.co/NgNGjWTF/20260502-160440.jpg" alt="Students Collage" class="collage-img" />
+          <div class="collage-overlay"></div>
+        </div>
+        <div class="collage-content">
+          <div class="quote-icon">“</div>
+          <h3 class="collage-title">To the man who believed in us when no one else did.</h3>
+          <p class="collage-text">Happy Birthday Sir! Your guidance has been the foundation of our success. We are forever grateful for the opportunities you've created for us.</p>
+          <div class="collage-footer">
+            <div class="student-avatars">
+              {students.slice(0, 4).map(s => <img src={s.img} alt="" class="avatar-small" />)}
+              <span class="avatar-more">+{students.length - 4} others</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-bottom: 5rem;
+  }
+
+  .student-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 0.75rem;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+    border: 1px solid var(--color-border);
+    height: 100%;
+  }
+
+  .student-card:hover {
+    transform: translateY(-10px) rotate(1deg);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(253, 185, 19, 0.3);
+  }
+
+  .image-box {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: #f0f0f0;
+  }
+
+  .image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-slow);
+  }
+
+  .student-card:hover .image-box img {
+    transform: scale(1.1);
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 34, 57, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition);
+    backdrop-filter: blur(4px);
+  }
+
+  .student-card:hover .image-overlay {
+    opacity: 1;
+  }
+
+  .view-btn {
+    background: white;
+    color: var(--color-navy-dark);
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.85rem;
+    transform: translateY(10px);
+    transition: var(--transition);
+  }
+
+  .student-card:hover .view-btn {
+    transform: translateY(0);
+  }
+
+  .card-content {
+    padding: 1.25rem 0.5rem 0.75rem;
+    text-align: center;
+  }
+
+  .student-name {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: var(--color-navy);
+  }
+
+  .student-batch {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+
+  /* ─── Collage Card ─── */
+  .collage-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .collage-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    background: white;
+    min-height: 400px;
+  }
+
+  .collage-visual {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .collage-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .collage-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent, white);
+  }
+
+  .collage-content {
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .quote-icon {
+    font-family: var(--font-serif);
+    font-size: 8rem;
+    line-height: 1;
+    color: rgba(253, 185, 19, 0.1);
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    pointer-events: none;
+  }
+
+  .collage-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-navy-dark);
+    position: relative;
+    z-index: 1;
+  }
+
+  .collage-text {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+  }
+
+  .student-avatars {
+    display: flex;
+    align-items: center;
+  }
+
+  .avatar-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid white;
+    margin-left: -12px;
+    object-fit: cover;
+  }
+
+  .avatar-small:first-child { margin-left: 0; }
+
+  .avatar-more {
+    margin-left: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-gold-dark);
+  }
+
+  @media (max-width: 900px) {
+    .collage-card {
+      grid-template-columns: 1fr;
+    }
+    .collage-overlay {
+      background: linear-gradient(to bottom, transparent, white);
+    }
+    .collage-content {
+      padding: 3rem 2rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    .student-card {
+      padding: 0.4rem;
+    }
+    .student-name {
+      font-size: 0.95rem;
+    }
+    .student-batch {
+      font-size: 0.75rem;
+    }
+    .card-content {
+      padding: 0.75rem 0.25rem 0.4rem;
+    }
+    .collage-content {
+      padding: 2rem 1.25rem;
+    }
+    .collage-title {
+      font-size: 1.5rem;
+    }
+    .collage-text {
+      font-size: 0.95rem;
+    }
+    .student-avatars {
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

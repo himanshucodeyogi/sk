@@ -1,0 +1,270 @@
+---
+const notes = [
+  { id: 1,  avatar: "https://i.ibb.co/vvm9Hm97/20260502-153902.jpg",      img: "https://i.ibb.co/G43gw1rs/20260502-154124.jpg",  author: "Laiba",           role: "Batch 2026" },
+  { id: 2,  avatar: "https://i.ibb.co/XffKnWZr/20260502-154218.jpg",      img: "https://i.ibb.co/fRP5LfT/20260502-154320.jpg",   author: "Payal",           role: "Batch 2026" },
+  { id: 3,  avatar: "https://i.ibb.co/ccLcYfxj/20260502-154355.jpg",      img: "https://phissfquqqtvuntxuusk.supabase.co/storage/v1/object/public/tributes/notes/1777734744676-50222bd4-64ed-4c52-b180-beaae57c99b2.jpg", author: "Anshul Sain", role: "Batch 2026" },
+  { id: 4,  avatar: "https://i.ibb.co/bjGm2mzz/20260502-154512.jpg",      img: "https://i.ibb.co/qYsTp4TD/IMG-20260502-154632.jpg", author: "Ilma Malik",   role: "Batch 2026" },
+  { id: 5,  avatar: "https://i.ibb.co/tMpV9GC3/20260502-171324.jpg",      img: "https://i.ibb.co/PGKWR2tW/20260502-154755.jpg",  author: "Anjali Dhiman",   role: "Batch 2026" },
+  { id: 6,  avatar: "https://i.ibb.co/xt7Mh6gN/20260502-154843.jpg",      img: "https://i.ibb.co/wFQx3wfC/20260502-154916.jpg",  author: "Priyanshi Ror",   role: "Batch 2026" },
+  { id: 7,  avatar: "https://i.ibb.co/mCPBRDGR/20260502-160134.jpg",      img: "https://i.ibb.co/tTqph1fp/20260502-160235.jpg",  author: "Rajat",           role: "Batch 2026" },
+  { id: 8,  avatar: "https://i.ibb.co/NgNGjWTF/20260502-160440.jpg",      img: "https://i.ibb.co/21fDxB8t/20260502-160409.jpg",  author: "Abdul Chauhan",   role: "Batch 2026" },
+  { id: 9,  avatar: "https://i.ibb.co/fdkZnypK/20260502-160630.jpg",      img: "https://i.ibb.co/hFtLMr3H/20260502-160702.jpg",  author: "Sneha Saini",     role: "Batch 2026" },
+  { id: 10, avatar: "https://i.ibb.co/S70Td6Hm/20260502-160803.jpg",      img: "https://i.ibb.co/W4gzg6GC/20260502-160834.jpg",  author: "Rishu Khalid",    role: "Batch 2026" },
+  { id: 11, avatar: "https://i.ibb.co/TBsbPsz7/20260502-160938.jpg",      img: "https://i.ibb.co/FkNjCgp0/20260502-161010.jpg",  author: "Arjun Dhiman",    role: "Batch 2026", avatarPos: "center" },
+  { id: 12, avatar: "https://i.ibb.co/MkX9mMD1/20260502-171840.jpg",      img: "https://i.ibb.co/1GG9JW8h/20260502-171919.jpg",  author: "Mohan Sain",      role: "Batch 2026", avatarPos: "center 30%" },
+  { id: 13, avatar: "https://i.ibb.co/m5h15ZmP/IMG-20260428-WA0003.jpg",  img: "https://i.ibb.co/zT8Qkr2F/20260502-173409.jpg",  author: "Himanshu Kashyap",role: "Batch 2026" },
+];
+---
+<section id="notes" class="notes-section bg-mesh-dark">
+  <div class="container">
+    <div class="section-header animate-fade-in">
+      <div class="section-badge">
+        <span>✍️</span> Handwritten Notes
+      </div>
+      <h2 class="section-title">Letters of <span class="text-gradient-gold">Gratitude</span></h2>
+      <p class="section-subtitle">
+        Words penned with love and respect. These handwritten notes are a testament to the impact you've had on our lives.
+      </p>
+    </div>
+    
+    <div class="notes-image-grid">
+      {notes.map((note, index) => (
+        <div class={`note-wrapper animate-fade-in delay-${(index % 3) + 1}`}>
+          <div class="handwritten-card glass-card">
+            <div class="note-image-container" data-lightbox={note.img} data-lightbox-alt={`Note by ${note.author}`}>
+              <img src={note.img} alt={`Note by ${note.author}`} loading="lazy" />
+              <div class="zoom-overlay">
+                <span>View Full Note</span>
+              </div>
+            </div>
+            <div class="note-author-footer">
+              <div class="author-info">
+                <img src={note.avatar} alt={note.author} class="author-avatar" loading="lazy" style={note.avatarPos ? `object-position: ${note.avatarPos}` : undefined} />
+                <div class="author-meta">
+                  <p class="author-name">{note.author}</p>
+                  <p class="author-role">{note.role}</p>
+                </div>
+              </div>
+              <div class="note-tag">Personal Note</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- CTA for more notes -->
+    <div class="notes-cta animate-fade-in delay-4">
+      <div class="cta-box glass-card-dark">
+        <div class="cta-content">
+          <h3>A heart full of wishes...</h3>
+          <p>Every student has a story to tell and a thank you to share.</p>
+        </div>
+        <div class="cta-action">
+          <button class="btn-gold-outline">More Heartfelt Wishes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .notes-section {
+    background: var(--color-cream-dark);
+    padding-bottom: 8rem;
+  }
+
+  .notes-image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .note-wrapper {
+    perspective: 1000px;
+  }
+
+  .handwritten-card {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 1.25rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-slow);
+  }
+
+  .handwritten-card:hover {
+    transform: translateY(-10px) rotate(1deg);
+    border-color: rgba(253, 185, 19, 0.3);
+    background: white;
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .note-image-container {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: #000;
+  }
+
+  .note-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-slow);
+  }
+
+  .handwritten-card:hover .note-image-container img {
+    transform: scale(1.05);
+  }
+
+  .zoom-overlay {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .handwritten-card:hover .zoom-overlay {
+    opacity: 1;
+  }
+
+  .zoom-overlay span {
+    background: white;
+    color: var(--color-navy-dark);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  .note-author-footer {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .author-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    border: 2px solid var(--color-gold);
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    color: var(--color-gold-dark);
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .author-role {
+    color: var(--color-text-secondary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .note-tag {
+    font-size: 0.7rem;
+    background: rgba(253, 185, 19, 0.1);
+    color: var(--color-gold);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(253, 185, 19, 0.2);
+    font-weight: 600;
+  }
+
+  /* ─── CTA Box ─── */
+  .notes-cta {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .cta-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem;
+    border: 1px solid rgba(253, 185, 19, 0.3);
+    background: linear-gradient(135deg, rgba(253, 185, 19, 0.06), white);
+  }
+
+  .cta-content h3 {
+    font-size: 1.75rem;
+    color: var(--color-navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-content p {
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+  }
+
+  .btn-gold-outline {
+    background: transparent;
+    border: 1.5px solid var(--color-gold);
+    color: var(--color-gold);
+    padding: 0.85rem 2rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .btn-gold-outline:hover {
+    background: var(--color-gold);
+    color: var(--color-navy-dark);
+    box-shadow: var(--shadow-gold);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .notes-image-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .cta-box {
+      flex-direction: column;
+      text-align: center;
+      gap: 2rem;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .cta-content h3 {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .notes-image-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .note-author-footer {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+  }
+</style>
