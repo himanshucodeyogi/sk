@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import musicSrc from '../assets/The_Founding_Vision.mp3';
 
 interface Props {
 	title: string;
@@ -91,6 +92,21 @@ const { title } = Astro.props;
 				</div>
 			</div>
 		</footer>
+
+		<!-- Background Music -->
+		<audio id="bg-music" src={musicSrc} loop preload="auto"></audio>
+
+		<!-- Music Toggle Button -->
+		<button id="music-toggle" class="music-btn" aria-label="Toggle background music">
+			<span class="music-paused-icon">♫</span>
+			<span class="music-playing-icon">
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
+			</span>
+			<span class="music-tooltip">The Founding Vision</span>
+		</button>
 	</body>
 </html>
 
@@ -330,6 +346,55 @@ const { title } = Astro.props;
 		});
 	})();
 
+	// Music toggle + autoplay
+	(function () {
+		var audio   = document.getElementById('bg-music');
+		var btn     = document.getElementById('music-toggle');
+		var active  = false;
+		var started = false;
+
+		function startMusic() {
+			if (started) return;
+			started = true;
+			audio.volume = 0.5;
+			audio.play().then(function () {
+				active = true;
+				btn.classList.add('playing');
+			}).catch(function () {
+				started = false;
+			});
+		}
+
+		// Try autoplay immediately on load
+		window.addEventListener('load', function () {
+			startMusic();
+		});
+
+		// Fallback: play on first user interaction if autoplay was blocked
+		['click', 'keydown', 'touchstart'].forEach(function (evt) {
+			document.addEventListener(evt, function onInteract() {
+				startMusic();
+				document.removeEventListener(evt, onInteract);
+			}, { once: true });
+		});
+
+		// Manual toggle via button
+		btn.addEventListener('click', function (e) {
+			e.stopPropagation();
+			if (active) {
+				audio.pause();
+				btn.classList.remove('playing');
+				active = false;
+			} else {
+				audio.volume = 0.5;
+				audio.play().catch(function () {});
+				btn.classList.add('playing');
+				active = true;
+			}
+			started = true;
+		});
+	})();
+
 	// Splash screen
 	(function () {
 		document.body.style.overflow = 'hidden';
@@ -478,6 +543,103 @@ const { title } = Astro.props;
 			flex-direction: column;
 			gap: 0.5rem;
 			text-align: center;
+		}
+	}
+
+	/* ─── Music Toggle Button ─── */
+	.music-btn {
+		position: fixed;
+		bottom: 2rem;
+		right: 2rem;
+		z-index: 9000;
+		width: 54px;
+		height: 54px;
+		border-radius: 50%;
+		border: 1.5px solid rgba(253, 185, 19, 0.5);
+		background: rgba(6, 21, 37, 0.85);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		color: #FDB913;
+		font-size: 1.4rem;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+	}
+
+	.music-btn:hover {
+		transform: scale(1.1);
+		border-color: #FDB913;
+		box-shadow: 0 0 20px rgba(253, 185, 19, 0.3), 0 4px 20px rgba(0, 0, 0, 0.3);
+	}
+
+	/* Pulse ring when playing */
+	.music-btn.playing {
+		border-color: #FDB913;
+		box-shadow: 0 0 0 0 rgba(253, 185, 19, 0.4), 0 4px 20px rgba(0,0,0,0.3);
+		animation: musicPulseRing 2s ease-out infinite;
+	}
+
+	@keyframes musicPulseRing {
+		0%   { box-shadow: 0 0 0 0   rgba(253, 185, 19, 0.5), 0 4px 20px rgba(0,0,0,0.3); }
+		70%  { box-shadow: 0 0 0 12px rgba(253, 185, 19, 0),   0 4px 20px rgba(0,0,0,0.3); }
+		100% { box-shadow: 0 0 0 0   rgba(253, 185, 19, 0),   0 4px 20px rgba(0,0,0,0.3); }
+	}
+
+	/* Icons visibility */
+	.music-paused-icon  { display: flex; }
+	.music-playing-icon { display: none; align-items: flex-end; gap: 3px; height: 20px; }
+
+	.music-btn.playing .music-paused-icon  { display: none; }
+	.music-btn.playing .music-playing-icon { display: flex; }
+
+	/* Equalizer bars */
+	.music-playing-icon .bar {
+		width: 3.5px;
+		background: #FDB913;
+		border-radius: 2px;
+		animation: eqBar 0.7s ease-in-out infinite alternate;
+	}
+	.bar:nth-child(1) { height: 8px;  animation-delay: 0s;    }
+	.bar:nth-child(2) { height: 18px; animation-delay: 0.15s; }
+	.bar:nth-child(3) { height: 12px; animation-delay: 0.05s; }
+	.bar:nth-child(4) { height: 16px; animation-delay: 0.2s;  }
+
+	@keyframes eqBar {
+		from { transform: scaleY(0.3); opacity: 0.6; }
+		to   { transform: scaleY(1);   opacity: 1; }
+	}
+
+	/* Tooltip */
+	.music-tooltip {
+		position: absolute;
+		right: calc(100% + 0.75rem);
+		top: 50%;
+		transform: translateY(-50%);
+		background: rgba(6, 21, 37, 0.95);
+		border: 1px solid rgba(253, 185, 19, 0.2);
+		color: rgba(255, 255, 255, 0.85);
+		font-size: 0.75rem;
+		font-weight: 500;
+		white-space: nowrap;
+		padding: 0.4rem 0.9rem;
+		border-radius: 6px;
+		pointer-events: none;
+		opacity: 0;
+		transition: opacity 0.2s ease;
+	}
+
+	.music-btn:hover .music-tooltip { opacity: 1; }
+
+	@media (max-width: 480px) {
+		.music-btn {
+			bottom: 1.25rem;
+			right: 1.25rem;
+			width: 46px;
+			height: 46px;
+			font-size: 1.2rem;
 		}
 	}
 </style>
