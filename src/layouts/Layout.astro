@@ -348,50 +348,75 @@ const { title } = Astro.props;
 
 	// Music toggle + autoplay
 	(function () {
-		var audio   = document.getElementById('bg-music');
-		var btn     = document.getElementById('music-toggle');
-		var active  = false;
-		var started = false;
+		var audio  = document.getElementById('bg-music');
+		var btn    = document.getElementById('music-toggle');
+		var active = false;
 
-		function startMusic() {
-			if (started) return;
-			started = true;
-			audio.volume = 0.5;
-			audio.play().then(function () {
-				active = true;
-				btn.classList.add('playing');
-			}).catch(function () {
-				started = false;
-			});
+		function markPlaying() {
+			active = true;
+			btn.classList.add('playing');
 		}
 
-		// Try autoplay immediately on load
+		// Start muted on load — browsers always allow muted autoplay
+		audio.muted = true;
+		audio.volume = 0.5;
 		window.addEventListener('load', function () {
-			startMusic();
+			audio.play().catch(function () {});
 		});
 
-		// Fallback: play on first user interaction if autoplay was blocked
-		['click', 'keydown', 'touchstart'].forEach(function (evt) {
-			document.addEventListener(evt, function onInteract() {
-				startMusic();
-				document.removeEventListener(evt, onInteract);
-			}, { once: true });
+		// On first scroll — unmute (audio is already playing, just silent)
+		window.addEventListener('scroll', function () {
+			if (active) return;
+			audio.muted = false;
+			if (!audio.paused) {
+				markPlaying();
+			} else {
+				audio.play().then(markPlaying).catch(function () {});
+			}
+		}, { passive: true, once: true });
+
+		// Fallback — first click/touch anywhere also unmutes
+		document.addEventListener('click', function () {
+			if (active) return;
+			audio.muted = false;
+			if (!audio.paused) markPlaying();
+			else audio.play().then(markPlaying).catch(function () {});
 		});
 
-		// Manual toggle via button
+		// Pause music when any video plays, resume when video stops
+		document.querySelectorAll('video').forEach(function (video) {
+			video.addEventListener('play', function () {
+				if (active) {
+					audio.pause();
+					btn.classList.remove('playing');
+				}
+			});
+			video.addEventListener('pause', function () {
+				if (active) {
+					audio.play().catch(function () {});
+					btn.classList.add('playing');
+				}
+			});
+			video.addEventListener('ended', function () {
+				if (active) {
+					audio.play().catch(function () {});
+					btn.classList.add('playing');
+				}
+			});
+		});
+
+		// Manual toggle button
 		btn.addEventListener('click', function (e) {
 			e.stopPropagation();
 			if (active) {
 				audio.pause();
-				btn.classList.remove('playing');
 				active = false;
+				btn.classList.remove('playing');
 			} else {
-				audio.volume = 0.5;
+				audio.muted = false;
 				audio.play().catch(function () {});
-				btn.classList.add('playing');
-				active = true;
+				markPlaying();
 			}
-			started = true;
 		});
 	})();
 
