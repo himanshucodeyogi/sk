@@ -85,6 +85,12 @@ const notes = [
     perspective: 1000px;
   }
 
+  /* Permanent polaroid tilt */
+  .note-wrapper:nth-child(4n+1) .handwritten-card { transform: rotate(-2deg); }
+  .note-wrapper:nth-child(4n+2) .handwritten-card { transform: rotate(1.8deg); }
+  .note-wrapper:nth-child(4n+3) .handwritten-card { transform: rotate(-1.3deg); }
+  .note-wrapper:nth-child(4n+4) .handwritten-card { transform: rotate(2.3deg); }
+
   .handwritten-card {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.08);
@@ -96,8 +102,8 @@ const notes = [
   }
 
   .handwritten-card:hover {
-    transform: translateY(-10px) rotate(1deg);
-    border-color: rgba(253, 185, 19, 0.3);
+    transform: translateY(-14px) rotate(0deg) scale(1.02) !important;
+    border-color: rgba(253, 185, 19, 0.35);
     background: white;
     box-shadow: var(--shadow-card-hover);
   }

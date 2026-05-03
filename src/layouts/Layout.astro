@@ -19,6 +19,27 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+		<!-- Splash Screen -->
+		<div id="splash" class="splash-screen">
+			<div class="splash-glow"></div>
+			<span class="splash-particle" style="top:18%;left:9%;animation-delay:0s">🎉</span>
+			<span class="splash-particle" style="top:22%;right:11%;animation-delay:0.5s">🎈</span>
+			<span class="splash-particle" style="top:70%;left:7%;animation-delay:1s">⭐</span>
+			<span class="splash-particle" style="top:74%;right:9%;animation-delay:0.3s">🎁</span>
+			<span class="splash-particle" style="top:45%;left:4%;animation-delay:1.3s">🎊</span>
+			<span class="splash-particle" style="top:38%;right:5%;animation-delay:0.7s">✨</span>
+			<div class="splash-content">
+				<span class="splash-cake">🎂</span>
+				<p class="splash-sub">Happy Birthday</p>
+				<h1 class="splash-name">SK Chaudhary Sir</h1>
+				<div class="splash-loader">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</div>
+
 		<slot />
 
 		<!-- Lightbox -->
@@ -154,6 +175,121 @@ const { title } = Astro.props;
 	[data-lightbox] {
 		cursor: zoom-in;
 	}
+
+	/* ─── Splash Screen ─── */
+	.splash-screen {
+		position: fixed;
+		inset: 0;
+		z-index: 99999;
+		background: #061525;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: opacity 0.7s ease, transform 0.7s ease;
+		overflow: hidden;
+	}
+
+	.splash-screen.hiding {
+		opacity: 0;
+		transform: scale(1.05);
+		pointer-events: none;
+	}
+
+	.splash-glow {
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(ellipse at center, rgba(253, 185, 19, 0.12) 0%, transparent 65%);
+		pointer-events: none;
+	}
+
+	.splash-particle {
+		position: absolute;
+		font-size: 2rem;
+		animation: splashFloat 3s ease-in-out infinite;
+		opacity: 0.6;
+		user-select: none;
+	}
+
+	@keyframes splashFloat {
+		0%, 100% { transform: translateY(0) rotate(0deg); }
+		50% { transform: translateY(-18px) rotate(12deg); }
+	}
+
+	.splash-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.splash-cake {
+		font-size: 5rem;
+		display: block;
+		margin-bottom: 1.5rem;
+		animation: cakeDrop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+		animation-delay: 0.15s;
+		opacity: 0;
+		filter: drop-shadow(0 0 24px rgba(253, 185, 19, 0.6));
+	}
+
+	@keyframes cakeDrop {
+		from { transform: scale(0) translateY(-40px) rotate(-15deg); opacity: 0; }
+		to   { transform: scale(1) translateY(0)     rotate(0deg);   opacity: 1; }
+	}
+
+	.splash-sub {
+		font-size: 0.8rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.28em;
+		color: #FDB913;
+		margin: 0 0 0.75rem;
+		animation: splashFadeUp 0.6s ease both;
+		animation-delay: 0.65s;
+		opacity: 0;
+	}
+
+	.splash-name {
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		font-weight: 800;
+		color: white;
+		letter-spacing: -0.02em;
+		margin: 0 0 2.5rem;
+		animation: splashFadeUp 0.6s ease both;
+		animation-delay: 0.9s;
+		opacity: 0;
+	}
+
+	@keyframes splashFadeUp {
+		from { opacity: 0; transform: translateY(18px); }
+		to   { opacity: 1; transform: translateY(0); }
+	}
+
+	.splash-loader {
+		display: flex;
+		gap: 0.6rem;
+		animation: splashFadeUp 0.5s ease both;
+		animation-delay: 1.3s;
+		opacity: 0;
+	}
+
+	.splash-loader span {
+		width: 9px;
+		height: 9px;
+		background: #FDB913;
+		border-radius: 50%;
+		animation: dotBounce 1.2s ease-in-out infinite;
+	}
+
+	.splash-loader span:nth-child(2) { animation-delay: 0.15s; }
+	.splash-loader span:nth-child(3) { animation-delay: 0.3s; }
+
+	@keyframes dotBounce {
+		0%, 80%, 100% { transform: translateY(0) scale(0.65); opacity: 0.5; }
+		40%           { transform: translateY(-9px) scale(1); opacity: 1; }
+	}
 </style>
 
 <script is:inline>
@@ -192,6 +328,20 @@ const { title } = Astro.props;
 		document.addEventListener('keydown', function (e) {
 			if (e.key === 'Escape') closeLightbox();
 		});
+	})();
+
+	// Splash screen
+	(function () {
+		document.body.style.overflow = 'hidden';
+		setTimeout(function () {
+			var splash = document.getElementById('splash');
+			if (!splash) return;
+			splash.classList.add('hiding');
+			setTimeout(function () {
+				splash.remove();
+				document.body.style.overflow = '';
+			}, 700);
+		}, 2300);
 	})();
 </script>
 
