@@ -1,20 +1,20 @@
 ---
 const notes = [
-  { id: 1,  avatar: "https://i.ibb.co/vvm9Hm97/20260502-153902.jpg",      img: "https://i.ibb.co/G43gw1rs/20260502-154124.jpg",  author: "Laiba",           role: "By CodeYogi Students" },
-  { id: 2,  avatar: "https://i.ibb.co/XffKnWZr/20260502-154218.jpg",      img: "https://i.ibb.co/fRP5LfT/20260502-154320.jpg",   author: "Payal",           role: "By CodeYogi Students" },
-  { id: 5,  avatar: "https://i.ibb.co/tMpV9GC3/20260502-171324.jpg",      img: "https://i.ibb.co/PGKWR2tW/20260502-154755.jpg",  author: "Anjali Dhiman",   role: "By CodeYogi Students" },
-  { id: 6,  avatar: "https://i.ibb.co/xt7Mh6gN/20260502-154843.jpg",      img: "https://i.ibb.co/wFQx3wfC/20260502-154916.jpg",  author: "Priyanshi Ror",   role: "By CodeYogi Students" },
-  { id: 7,  avatar: "https://i.ibb.co/mCPBRDGR/20260502-160134.jpg",      img: "https://i.ibb.co/tTqph1fp/20260502-160235.jpg",  author: "Rajat",           role: "By CodeYogi Students" },
-  { id: 9,  avatar: "https://i.ibb.co/fdkZnypK/20260502-160630.jpg",      img: "https://i.ibb.co/hFtLMr3H/20260502-160702.jpg",  author: "Sneha Saini",     role: "By CodeYogi Students" },
-  { id: 11, avatar: "https://i.ibb.co/TBsbPsz7/20260502-160938.jpg",      img: "https://i.ibb.co/FkNjCgp0/20260502-161010.jpg",  author: "Arjun Dhiman",    role: "By CodeYogi Students", avatarPos: "center" },
-  { id: 13, avatar: "https://i.ibb.co/m5h15ZmP/IMG-20260428-WA0003.jpg",  img: "https://i.ibb.co/zT8Qkr2F/20260502-173409.jpg",  author: "Himanshu Kashyap",role: "By CodeYogi Students" },
-  { id: 14, avatar: "https://i.ibb.co/hJ4RTWjZ/image.png", img: "https://i.ibb.co/spN5fXG0/image.png", author: "Mohammad Danish", role: "By CodeYogi Students"},
-  { id: 8,  avatar: "https://i.ibb.co/NgNGjWTF/20260502-160440.jpg",      img: "https://i.ibb.co/21fDxB8t/20260502-160409.jpg",  author: "Abdul Chauhan",   role: "By CodeYogi Students" },
-  { id: 4,  avatar: "https://i.ibb.co/bjGm2mzz/20260502-154512.jpg",      img: "https://i.ibb.co/qYsTp4TD/IMG-20260502-154632.jpg", author: "Ilma Malik",   role: "By CodeYogi Students" },
-  { id: 10, avatar: "https://i.ibb.co/S70Td6Hm/20260502-160803.jpg",      img: "https://i.ibb.co/W4gzg6GC/20260502-160834.jpg",  author: "Rishu Khalid",    role: "By CodeYogi Students" },
-  { id: 12, avatar: "https://i.ibb.co/MkX9mMD1/20260502-171840.jpg",      img: "https://i.ibb.co/1GG9JW8h/20260502-171919.jpg",  author: "Mohan Sain",      role: "By CodeYogi Students", avatarPos: "center 30%" },
-  { id: 3,  avatar: "https://i.ibb.co/ccLcYfxj/20260502-154355.jpg",      img: "https://phissfquqqtvuntxuusk.supabase.co/storage/v1/object/public/tributes/notes/1777734744676-50222bd4-64ed-4c52-b180-beaae57c99b2.jpg", author: "Anshul Sain", role: "By CodeYogi Students" },
-  { id: 15, avatar: "https://i.ibb.co/ccV8PvxX/IMG-20260502-133023.png",  img: "https://i.ibb.co/JwCb0wk7/file-00000000580471fa9118e7ad28851a62.png", author: "Lavish", role: "By CodeYogi Students" },
+  { id: 1,  avatar: "https://i.ibb.co/vvm9Hm97/20260502-153902.jpg",      img: "https://i.ibb.co/G43gw1rs/20260502-154124.jpg",  author: "Laiba",           role: "By CodeYogi Students", studentClass: "College Student (BA)", stream: "PCB", school: "J.B.S. Hindu Kanya Inter College" },
+  { id: 2,  avatar: "https://i.ibb.co/XffKnWZr/20260502-154218.jpg",      img: "https://i.ibb.co/fRP5LfT/20260502-154320.jpg",   author: "Payal",           role: "By CodeYogi Students", studentClass: "College Student", stream: "Arts", school: "Guru Nanak Girls I.C." },
+  { id: 5,  avatar: "https://i.ibb.co/tMpV9GC3/20260502-171324.jpg",      img: "https://i.ibb.co/PGKWR2tW/20260502-154755.jpg",  author: "Anjali Dhiman",   role: "By CodeYogi Students", studentClass: "12th Passout", stream: "PCM", school: "Public Inter College", avatarPos: undefined },
+  { id: 6,  avatar: "https://i.ibb.co/xt7Mh6gN/20260502-154843.jpg",      img: "https://i.ibb.co/wFQx3wfC/20260502-154916.jpg",  author: "Priyanshi Ror",   role: "By CodeYogi Students", studentClass: "College Student (BCA)", stream: "PCM", school: "H.R. Inter College" },
+  { id: 7,  avatar: "https://i.ibb.co/mCPBRDGR/20260502-160134.jpg",      img: "https://i.ibb.co/tTqph1fp/20260502-160235.jpg",  author: "Rajat",           role: "By CodeYogi Students", studentClass: "College Student (BCA)", stream: "PCM", school: "H.R. Inter College" },
+  { id: 9,  avatar: "https://i.ibb.co/fdkZnypK/20260502-160630.jpg",      img: "https://i.ibb.co/hFtLMr3H/20260502-160702.jpg",  author: "Sneha Saini",     role: "By CodeYogi Students", studentClass: "12 Passout", stream: "Arts", school: "Guru Nanak Girls I.C." },
+  { id: 11, avatar: "https://i.ibb.co/TBsbPsz7/20260502-160938.jpg",      img: "https://i.ibb.co/FkNjCgp0/20260502-161010.jpg",  author: "Arjun Dhiman",    role: "By CodeYogi Students", studentClass: "College Student (BCA)", stream: "PCM", school: "Public Inter College", avatarPos: "center" },
+  { id: 13, avatar: "https://i.ibb.co/m5h15ZmP/IMG-20260428-WA0003.jpg",  img: "https://i.ibb.co/zT8Qkr2F/20260502-173409.jpg",  author: "Himanshu Kashyap",role: "By CodeYogi Students", studentClass: "12", stream: "PCM", school: "S.A.M. Inter College" },
+  { id: 14, avatar: "https://i.ibb.co/hJ4RTWjZ/image.png",                img: "https://i.ibb.co/spN5fXG0/image.png",            author: "Mohammad Danish", role: "By CodeYogi Students", studentClass: "10", stream: "Class 10", school: "Gochar Krishi Inter College" },
+  { id: 8,  avatar: "https://i.ibb.co/NgNGjWTF/20260502-160440.jpg",      img: "https://i.ibb.co/21fDxB8t/20260502-160409.jpg",  author: "Abdul Chauhan",   role: "By CodeYogi Students", studentClass: "College Student (BCA)", stream: "PCM", school: "Jagdish Prashad Adaresh Vidhya Mandir Inter College, Kota" },
+  { id: 4,  avatar: "https://i.ibb.co/bjGm2mzz/20260502-154512.jpg",      img: "https://i.ibb.co/qYsTp4TD/IMG-20260502-154632.jpg", author: "Ilma Malik",  role: "By CodeYogi Students", studentClass: "12 Passout", stream: "PCM", school: "Guru Nanak Girls I.C." },
+  { id: 10, avatar: "https://i.ibb.co/S70Td6Hm/20260502-160803.jpg",      img: "https://i.ibb.co/W4gzg6GC/20260502-160834.jpg",  author: "Rishu Khalid",    role: "By CodeYogi Students", studentClass: "12 Passout", stream: "Arts", school: "Arya Kanya Inter College, Gangoh" },
+  { id: 12, avatar: "https://i.ibb.co/MkX9mMD1/20260502-171840.jpg",      img: "https://i.ibb.co/1GG9JW8h/20260502-171919.jpg",  author: "Mohan Sain",      role: "By CodeYogi Students", studentClass: "College Student (BCA)", stream: "PCM", school: "Govt. Inter College Ghumti", avatarPos: "center 30%" },
+  { id: 3,  avatar: "https://i.ibb.co/ccLcYfxj/20260502-154355.jpg",      img: "https://phissfquqqtvuntxuusk.supabase.co/storage/v1/object/public/tributes/notes/1777734744676-50222bd4-64ed-4c52-b180-beaae57c99b2.jpg", author: "Anshul Sain", role: "By CodeYogi Students", studentClass: "11", stream: "PCM", school: "Saraswati Inter College" },
+  { id: 15, avatar: "https://i.ibb.co/ccV8PvxX/IMG-20260502-133023.png",  img: "https://i.ibb.co/JwCb0wk7/file-00000000580471fa9118e7ad28851a62.png", author: "Lavish", role: "By CodeYogi Students", studentClass: "12", stream: "PCM", school: "S.A.M. Inter College" },
 ];
 ---
 <section id="notes" class="notes-section bg-mesh-dark">
@@ -43,8 +43,10 @@ const notes = [
               <div class="author-info">
                 <img src={note.avatar} alt={note.author} class="author-avatar" loading="lazy" style={note.avatarPos ? `object-position: ${note.avatarPos}` : undefined} />
                 <div class="author-meta">
-                  <p class="author-name">{note.author}</p>
-                  <p class="author-role">{note.role}</p>
+                  <p class="student-line"><span class="student-label">Name</span> = <span class="student-value">{note.author}</span></p>
+                  <p class="student-line"><span class="student-label">Class</span> = <span class="student-value">{note.studentClass}</span></p>
+                  <p class="student-line"><span class="student-label">Stream</span> = <span class="student-value">{note.stream}</span></p>
+                  <p class="student-line"><span class="student-label">{note.studentClass.toLowerCase().includes('college student') ? 'College' : 'School'}</span> = <span class="student-value">{note.school}</span></p>
                 </div>
               </div>
               <div class="note-tag">Personal Note</div>
@@ -184,13 +186,20 @@ const notes = [
     margin: 0;
   }
 
-  .author-role {
+  .student-line {
+    font-size: 0.8rem;
+    margin: 0 0 0.25rem;
+    line-height: 1.4;
     color: var(--color-text-secondary);
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0;
+  }
+
+  .student-label {
+    font-weight: 700;
+    color: var(--color-gold-dark);
+  }
+
+  .student-value {
+    color: var(--color-navy);
   }
 
   .note-tag {

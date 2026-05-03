@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Note Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f0ece3;
+      font-family: 'Caveat', cursive;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.4rem;
+      color: #4a3728;
+      margin-bottom: 36px;
+      letter-spacing: 1px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #fffdf0;
+      border-radius: 4px;
+      padding: 22px 24px 20px;
+      box-shadow: 3px 4px 12px rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.1);
+      position: relative;
+      border-top: 4px solid var(--accent);
+      transition: transform 0.15s ease;
+    }
+
+    .card:hover { transform: translateY(-3px); }
+
+    /* ruled lines */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 56px 24px 20px;
+      background: repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        #c8d8e8 27px,
+        #c8d8e8 28px
+      );
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    /* pin dot */
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .name {
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: #2c1a0e;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 2px dashed var(--accent);
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+      position: relative;
+      z-index: 1;
+      line-height: 1.4;
+    }
+
+    .label {
+      font-weight: 600;
+      color: var(--accent-dark);
+      min-width: 60px;
+      flex-shrink: 0;
+    }
+
+    .value {
+      color: #3d2b1f;
+    }
+
+    /* colour themes per card */
+    .card:nth-child(5n+1)  { --accent:#e07b54; --accent-dark:#b85c35; }
+    .card:nth-child(5n+2)  { --accent:#5b9bd5; --accent-dark:#2f72b0; }
+    .card:nth-child(5n+3)  { --accent:#6ab187; --accent-dark:#3d8a5e; }
+    .card:nth-child(5n+4)  { --accent:#c47ecb; --accent-dark:#9148a0; }
+    .card:nth-child(5n+0)  { --accent:#e8b84b; --accent-dark:#b8862a; }
+  </style>
+</head>
+<body>
+
+<h1>Student Note Cards</h1>
+
+<div class="grid">
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="name">Arjun Dhiman</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">College Student (BCA)</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">PCM</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">Public Inter College</span></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="name">Himanshu</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">12</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">PCM</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">S.A.M. Inter College</span></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="name">Payal</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">College Student</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">Arts</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">Guru Nanak Girls I.C.</span></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="name">Laiba Ansari</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">College Student (BA)</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">PCB</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">J.B.S. Hindu Kanya Inter College</span></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="name">Lavish</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">12</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">PCM</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">S.A.M. Inter College</span></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="name">Sneha Saini</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">12 Passout</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">Arts</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">Guru Nanak Girls I.C.</span></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="name">Anshul Sain</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">11</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">PCM</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">Saraswati Inter College</span></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="name">Anjali Dhiman</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">12th Passout</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">PCM</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">Public Inter College</span></div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="name">Priyanshi Ror</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">College Student (BCA)</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">PCM</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">H.R. Inter College</span></div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="name">Abdul Chauhan</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">College Student (BCA)</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">PCM</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">Jagdish Prashad Adaresh Vidhya Mandir Inter College, Kota</span></div>
+  </div>
+
+  <!-- 11 -->
+  <div class="card">
+    <div class="name">Mohan</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">College Student (BCA)</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">PCM</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">Govt. Inter College Ghumti</span></div>
+  </div>
+
+  <!-- 12 -->
+  <div class="card">
+    <div class="name">Mohammad Danish</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">10</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">Class 10</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">Gochar Krishi Inter College</span></div>
+  </div>
+
+  <!-- 13 -->
+  <div class="card">
+    <div class="name">Ilma Malik</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">12 Passout</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">PCM</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">Guru Nanak Girls I.C.</span></div>
+  </div>
+
+  <!-- 14 -->
+  <div class="card">
+    <div class="name">Rishu Khalid</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">12 Passout</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">Arts</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">Arya Kanya Inter College, Gangoh</span></div>
+  </div>
+
+  <!-- 15 -->
+  <div class="card">
+    <div class="name">Rajat Dhariya</div>
+    <div class="info-row"><span class="label">Class:</span><span class="value">College Student (BCA)</span></div>
+    <div class="info-row"><span class="label">Stream:</span><span class="value">PCM</span></div>
+    <div class="info-row"><span class="label">School:</span><span class="value">H.R. Inter College</span></div>
+  </div>
+
+</div>
+</body>
+</html>
