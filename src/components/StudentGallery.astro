@@ -2,7 +2,7 @@
 const students = [
   { id: 1, name: "Laiba", batch: "Batch 2026", img: "https://i.ibb.co/vvm9Hm97/20260502-153902.jpg" },
   { id: 2, name: "Payal", batch: "Batch 2026", img: "https://i.ibb.co/XffKnWZr/20260502-154218.jpg" },
-  { id: 3, name: "Anshul sain", batch: "Batch 2026", img: "https://i.ibb.co/ccLcYfxj/20260502-154355.jpg" },
+  { id: 3, name: "Anshul sain", batch: "Batch 2026", img: "https://i.ibb.co/ccLcYfxj/20260502-154355.jpg", imgPos: "top" },
   { id: 4, name: "Ilma malik", batch: "Batch 2026", img: "https://i.ibb.co/bjGm2mzz/20260502-154512.jpg" },
   { id: 5,  name: "Anjali Dhiman",    batch: "Batch 2026", img: "https://i.ibb.co/tMpV9GC3/20260502-171324.jpg" },
   { id: 6,  name: "Priyanshi Ror",    batch: "Batch 2026", img: "https://i.ibb.co/xt7Mh6gN/20260502-154843.jpg" },
@@ -33,7 +33,7 @@ const students = [
         <div class={`gallery-item animate-scale delay-${(index % 4) + 1}`}>
           <div class="student-card">
             <div class="image-box" data-lightbox={student.img} data-lightbox-alt={student.name}>
-              <img src={student.img} alt={student.name} loading="lazy" />
+              <img src={student.img} alt={student.name} loading="lazy" style={student.imgPos ? `object-position: ${student.imgPos}` : undefined} />
               <div class="image-overlay">
                 <span class="view-btn">View</span>
               </div>

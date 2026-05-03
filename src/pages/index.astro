@@ -53,20 +53,39 @@ import Videos from '../components/Videos.astro';
 		<StudentGallery />
 
 		<!-- Final Wish Section -->
-		<section class="final-wish">
+		<section class="final-wish" id="final-wish">
+			<!-- Pulsing rings -->
+			<div class="wish-ring wish-ring-1"></div>
+			<div class="wish-ring wish-ring-2"></div>
+			<div class="wish-ring wish-ring-3"></div>
+			<!-- Background glow -->
 			<div class="wish-bg"></div>
-			<div class="container animate-fade-in" style="position: relative; z-index: 1;">
-				<div class="wish-badge">🎉 A Heartfelt Wish</div>
-				<h2 class="wish-title">Once Again, <br /><span class="text-gradient-gold">Happy Birthday Sir!</span></h2>
-				<p class="wish-text">
+			<!-- Floating particles -->
+			<span class="wish-particle" style="top:10%;left:7%;font-size:1.8rem;animation-delay:0s">✨</span>
+			<span class="wish-particle" style="top:20%;right:9%;font-size:1.3rem;animation-delay:0.8s">⭐</span>
+			<span class="wish-particle" style="top:68%;left:5%;font-size:2rem;animation-delay:1.4s">🌟</span>
+			<span class="wish-particle" style="top:72%;right:7%;font-size:1.5rem;animation-delay:0.4s">✨</span>
+			<span class="wish-particle" style="top:42%;left:3%;font-size:1.1rem;animation-delay:2s">💫</span>
+			<span class="wish-particle" style="top:33%;right:4%;font-size:1.4rem;animation-delay:1s">⭐</span>
+			<span class="wish-particle" style="top:55%;left:13%;font-size:1rem;animation-delay:1.8s">✨</span>
+			<span class="wish-particle" style="top:22%;right:16%;font-size:1.1rem;animation-delay:1.6s">💫</span>
+
+			<div class="container wish-inner">
+				<div class="wish-badge wish-item">🎉 A Heartfelt Wish</div>
+				<h2 class="wish-title wish-item">
+					Once Again, <br />
+					<span class="wish-gold-text">Happy Birthday Sir!</span>
+				</h2>
+				<div class="wish-divider wish-item"></div>
+				<p class="wish-text wish-item">
 					Your vision and dedication have changed countless lives. Today we celebrate the incredible person you are.
 				</p>
-				<div class="wish-emojis">
-					<span class="animate-float" style="animation-delay: 0s;">🎂</span>
-					<span class="animate-float" style="animation-delay: 0.5s;">🎉</span>
-					<span class="animate-float" style="animation-delay: 1s;">🎈</span>
-					<span class="animate-float" style="animation-delay: 1.5s;">🥳</span>
-					<span class="animate-float" style="animation-delay: 2s;">🎁</span>
+				<div class="wish-emojis wish-item">
+					<span class="wish-emoji" style="animation-delay:0s">🎂</span>
+					<span class="wish-emoji" style="animation-delay:0.2s">🎉</span>
+					<span class="wish-emoji" style="animation-delay:0.4s">🎈</span>
+					<span class="wish-emoji" style="animation-delay:0.6s">🥳</span>
+					<span class="wish-emoji" style="animation-delay:0.8s">🎁</span>
 				</div>
 			</div>
 		</section>
@@ -242,7 +261,7 @@ import Videos from '../components/Videos.astro';
 	/* ─── Final Wish ─── */
 	.final-wish {
 		background: var(--color-cream);
-		padding: 8rem 0;
+		padding: 9rem 0;
 		text-align: center;
 		position: relative;
 		overflow: hidden;
@@ -251,12 +270,59 @@ import Videos from '../components/Videos.astro';
 	.wish-bg {
 		position: absolute;
 		inset: 0;
-		background: 
+		background:
 			radial-gradient(ellipse at 30% 50%, rgba(253, 185, 19, 0.08) 0%, transparent 60%),
 			radial-gradient(ellipse at 70% 50%, rgba(11, 34, 57, 0.04) 0%, transparent 60%);
 		pointer-events: none;
+		animation: wishGlowPulse 4s ease-in-out infinite;
 	}
 
+	@keyframes wishGlowPulse {
+		0%, 100% { opacity: 0.7; }
+		50%       { opacity: 1; }
+	}
+
+	/* Expanding rings */
+	.wish-ring {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		border-radius: 50%;
+		border: 1px solid rgba(11, 34, 57, 0.08);
+		pointer-events: none;
+		animation: ringExpand 5s ease-out infinite;
+	}
+
+	.wish-ring-1 { width: 280px; height: 280px; animation-delay: 0s; }
+	.wish-ring-2 { width: 520px; height: 520px; animation-delay: 1.7s; }
+	.wish-ring-3 { width: 780px; height: 780px; animation-delay: 3.3s; }
+
+	@keyframes ringExpand {
+		0%   { transform: translate(-50%, -50%) scale(0.6); opacity: 0.7; }
+		100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+	}
+
+	/* Floating particles */
+	.wish-particle {
+		position: absolute;
+		pointer-events: none;
+		user-select: none;
+		opacity: 0.55;
+		animation: particleDrift 4.5s ease-in-out infinite;
+	}
+
+	@keyframes particleDrift {
+		0%, 100% { transform: translateY(0)    rotate(0deg)  scale(1);    }
+		33%       { transform: translateY(-16px) rotate(10deg) scale(1.12); }
+		66%       { transform: translateY(-7px)  rotate(-6deg) scale(0.93); }
+	}
+
+	.wish-inner {
+		position: relative;
+		z-index: 1;
+	}
+
+	/* Badge */
 	.wish-badge {
 		display: inline-flex;
 		align-items: center;
@@ -265,57 +331,138 @@ import Videos from '../components/Videos.astro';
 		border: 1px solid rgba(253, 185, 19, 0.2);
 		color: var(--color-gold-dark);
 		font-size: 0.85rem;
-		font-weight: 600;
-		letter-spacing: 0.08em;
+		font-weight: 700;
+		letter-spacing: 0.1em;
 		text-transform: uppercase;
-		padding: 0.5rem 1.5rem;
+		padding: 0.6rem 1.75rem;
 		border-radius: var(--radius-full);
 		margin-bottom: 2rem;
+		position: relative;
+		overflow: hidden;
 	}
 
+	.wish-badge::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+		transform: translateX(-100%);
+		animation: badgeShine 3.5s ease-in-out infinite;
+	}
+
+	@keyframes badgeShine {
+		0%       { transform: translateX(-100%); }
+		40%, 100% { transform: translateX(150%); }
+	}
+
+	/* Title */
 	.wish-title {
-		font-size: clamp(2.5rem, 6vw, 4.5rem);
-		margin-bottom: 1.5rem;
+		font-size: clamp(2.5rem, 6vw, 5rem);
+		margin-bottom: 1.25rem;
 		letter-spacing: -0.02em;
 		color: var(--color-navy);
+		line-height: 1.1;
 	}
 
+	/* Animated gold gradient text */
+	.wish-gold-text {
+		background: linear-gradient(90deg, #E5A100 0%, #FDB913 30%, #FFD54F 50%, #FDB913 70%, #E5A100 100%);
+		background-size: 200% auto;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		animation: goldFlow 3s linear infinite;
+	}
+
+	@keyframes goldFlow {
+		0%   { background-position: 0% center; }
+		100% { background-position: 200% center; }
+	}
+
+	/* Glowing divider */
+	.wish-divider {
+		width: 80px;
+		height: 2px;
+		background: linear-gradient(90deg, transparent, #FDB913, transparent);
+		margin: 0 auto 2rem;
+		animation: dividerPulse 2.5s ease-in-out infinite;
+	}
+
+	@keyframes dividerPulse {
+		0%, 100% { width: 80px;  box-shadow: 0 0 8px rgba(253,185,19,0.4); }
+		50%       { width: 120px; box-shadow: 0 0 20px rgba(253,185,19,0.8); }
+	}
+
+	/* Text */
 	.wish-text {
 		font-size: 1.15rem;
 		color: var(--color-text-secondary);
 		max-width: 560px;
-		margin: 0 auto 3rem;
-		line-height: 1.7;
+		margin: 0 auto 3.5rem;
+		line-height: 1.8;
 	}
 
+	/* Emojis */
 	.wish-emojis {
 		display: flex;
 		justify-content: center;
 		gap: 1.5rem;
-		font-size: 2.5rem;
 	}
 
+	.wish-emoji {
+		font-size: 2.8rem;
+		display: inline-block;
+		animation: emojiDance 2.2s ease-in-out infinite;
+		cursor: default;
+		user-select: none;
+		filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+	}
+
+	@keyframes emojiDance {
+		0%, 100% { transform: translateY(0)    scale(1)    rotate(0deg);  }
+		25%       { transform: translateY(-16px) scale(1.18) rotate(-6deg); }
+		75%       { transform: translateY(-8px)  scale(1.09) rotate(4deg);  }
+	}
+
+	.wish-emoji:hover {
+		animation: emojiPop 0.45s ease forwards;
+	}
+
+	@keyframes emojiPop {
+		0%   { transform: scale(1)   rotate(0deg); }
+		50%  { transform: scale(1.5) rotate(180deg); }
+		100% { transform: scale(1)   rotate(360deg); }
+	}
+
+	/* Scroll-reveal — pure CSS, no JS dependency */
+	.wish-item {
+		animation: wishReveal 0.7s ease both;
+	}
+
+	@keyframes wishReveal {
+		from { opacity: 0; transform: translateY(28px); }
+		to   { opacity: 1; transform: translateY(0); }
+	}
+
+	.wish-item:nth-child(1) { animation-delay: 0.1s; }
+	.wish-item:nth-child(2) { animation-delay: 0.3s; }
+	.wish-item:nth-child(3) { animation-delay: 0.5s; }
+	.wish-item:nth-child(4) { animation-delay: 0.65s; }
+	.wish-item:nth-child(5) { animation-delay: 0.8s; }
+
 	@media (max-width: 768px) {
-		.final-wish {
-			padding: 5rem 0;
-		}
-		.wish-text {
-			font-size: 1rem;
-		}
-		.wish-emojis {
-			gap: 1rem;
-			font-size: 2rem;
-		}
+		.final-wish { padding: 6rem 0; }
+		.wish-text  { font-size: 1rem; }
+		.wish-emojis { gap: 1rem; }
+		.wish-emoji  { font-size: 2.2rem; }
+		.wish-ring-3 { display: none; }
 	}
 
 	@media (max-width: 480px) {
-		.final-wish {
-			padding: 3.5rem 0;
-		}
-		.wish-emojis {
-			gap: 0.75rem;
-			font-size: 1.6rem;
-		}
+		.final-wish  { padding: 4rem 0; }
+		.wish-emojis { gap: 0.75rem; }
+		.wish-emoji  { font-size: 1.8rem; }
+		.wish-ring-2 { display: none; }
 	}
 </style>
 
@@ -364,6 +511,21 @@ import Videos from '../components/Videos.astro';
 		setTimeout(fireConfetti, 1000);
 	});
 
-	// Fire on final wish click
-	document.querySelector('.final-wish')?.addEventListener('click', fireConfetti);
+	// Confetti when final-wish section enters viewport
+	const wishSection = document.getElementById('final-wish');
+	let wishTriggered = false;
+
+	const wishObserver = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting && !wishTriggered) {
+				wishTriggered = true;
+				setTimeout(fireConfetti, 400);
+			}
+		});
+	}, { threshold: 0.1 });
+
+	if (wishSection) wishObserver.observe(wishSection);
+
+	// Fire on click too
+	wishSection?.addEventListener('click', fireConfetti);
 </script>
