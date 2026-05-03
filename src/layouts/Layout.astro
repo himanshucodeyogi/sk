@@ -87,7 +87,7 @@ const { title } = Astro.props;
 
 				<!-- Footer Bottom -->
 				<div class="footer-bottom">
-					<p class="footer-made">Made with <span class="heart">❤️</span> by <strong>CodeYogi Students</strong></p>
+					<p class="footer-made">Made with <span class="heart">❤️</span> by <strong>CodeYogi Student</strong></p>
 					<p class="footer-copy">© 2026 Birthday Tribute. Crafted with love and gratitude.</p>
 				</div>
 			</div>
@@ -349,42 +349,47 @@ const { title } = Astro.props;
 
 	// Music toggle + autoplay
 	(function () {
-		var audio  = document.getElementById('bg-music');
-		var btn    = document.getElementById('music-toggle');
-		var active = false;
+		var audio       = document.getElementById('bg-music');
+		var btn         = document.getElementById('music-toggle');
+		var active      = false;
+		var userStopped = false; // true = user ne manually stop kiya
 
 		function markPlaying() {
 			active = true;
 			btn.classList.add('playing');
 		}
 
-		// Start muted on load — browsers always allow muted autoplay
+		function startAudio() {
+			if (userStopped) return; // user ne stop kiya hai, auto-play mat karo
+			audio.muted = false;
+			audio.volume = 0.5;
+			if (!audio.paused) {
+				markPlaying();
+			} else {
+				audio.play().then(markPlaying).catch(function () {});
+			}
+		}
+
+		// Start muted on load
 		audio.muted = true;
 		audio.volume = 0.5;
 		window.addEventListener('load', function () {
 			audio.play().catch(function () {});
 		});
 
-		// On first scroll — unmute (audio is already playing, just silent)
+		// First scroll — unmute (only if user hasn't manually stopped)
 		window.addEventListener('scroll', function () {
-			if (active) return;
-			audio.muted = false;
-			if (!audio.paused) {
-				markPlaying();
-			} else {
-				audio.play().then(markPlaying).catch(function () {});
-			}
+			if (active || userStopped) return;
+			startAudio();
 		}, { passive: true, once: true });
 
-		// Fallback — first click/touch anywhere also unmutes
+		// First click anywhere — unmute (only if user hasn't manually stopped)
 		document.addEventListener('click', function () {
-			if (active) return;
-			audio.muted = false;
-			if (!audio.paused) markPlaying();
-			else audio.play().then(markPlaying).catch(function () {});
+			if (active || userStopped) return;
+			startAudio();
 		});
 
-		// Pause music when any video plays, resume when video stops
+		// Video play — pause music
 		document.querySelectorAll('video').forEach(function (video) {
 			video.addEventListener('play', function () {
 				if (active) {
@@ -393,27 +398,29 @@ const { title } = Astro.props;
 				}
 			});
 			video.addEventListener('pause', function () {
-				if (active) {
+				if (active && !userStopped) {
 					audio.play().catch(function () {});
 					btn.classList.add('playing');
 				}
 			});
 			video.addEventListener('ended', function () {
-				if (active) {
+				if (active && !userStopped) {
 					audio.play().catch(function () {});
 					btn.classList.add('playing');
 				}
 			});
 		});
 
-		// Manual toggle button
+		// Manual toggle button — sirf yahan se play/stop hoga after user stops
 		btn.addEventListener('click', function (e) {
 			e.stopPropagation();
 			if (active) {
 				audio.pause();
 				active = false;
+				userStopped = true; // user ne intentionally stop kiya
 				btn.classList.remove('playing');
 			} else {
+				userStopped = false; // user ne wapas play kiya
 				audio.muted = false;
 				audio.play().catch(function () {});
 				markPlaying();
