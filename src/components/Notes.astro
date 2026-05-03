@@ -1,7 +1,7 @@
 ---
 const notes = [
   { id: 1,  avatar: "https://i.ibb.co/vvm9Hm97/20260502-153902.jpg",      img: "https://i.ibb.co/G43gw1rs/20260502-154124.jpg",  author: "Laiba",           role: "By CodeYogi Students", studentClass: "College Student (BA)", stream: "PCB", school: "J.B.S. Hindu Kanya Inter College" },
-  { id: 2,  avatar: "https://i.ibb.co/XffKnWZr/20260502-154218.jpg",      img: "https://i.ibb.co/fRP5LfT/20260502-154320.jpg",   author: "Payal",           role: "By CodeYogi Students", studentClass: "College Student", stream: "Arts", school: "Guru Nanak Girls I.C." },
+  { id: 2,  avatar: "https://i.ibb.co/XffKnWZr/20260502-154218.jpg",      img: "https://i.ibb.co/fRP5LfT/20260502-154320.jpg",   author: "Payal",           role: "By CodeYogi Students", studentClass: "12 Passout", stream: "Arts", school: "Guru Nanak Girls I.C." },
   { id: 5,  avatar: "https://i.ibb.co/tMpV9GC3/20260502-171324.jpg",      img: "https://i.ibb.co/PGKWR2tW/20260502-154755.jpg",  author: "Anjali Dhiman",   role: "By CodeYogi Students", studentClass: "12th Passout", stream: "PCM", school: "Public Inter College", avatarPos: undefined },
   { id: 6,  avatar: "https://i.ibb.co/xt7Mh6gN/20260502-154843.jpg",      img: "https://i.ibb.co/wFQx3wfC/20260502-154916.jpg",  author: "Priyanshi Ror",   role: "By CodeYogi Students", studentClass: "College Student (BCA)", stream: "PCM", school: "H.R. Inter College" },
   { id: 7,  avatar: "https://i.ibb.co/mCPBRDGR/20260502-160134.jpg",      img: "https://i.ibb.co/tTqph1fp/20260502-160235.jpg",  author: "Rajat",           role: "By CodeYogi Students", studentClass: "College Student (BCA)", stream: "PCM", school: "H.R. Inter College" },
@@ -46,7 +46,7 @@ const notes = [
                   <p class="student-line"><span class="student-label">Name</span> = <span class="student-value">{note.author}</span></p>
                   <p class="student-line"><span class="student-label">Class</span> = <span class="student-value">{note.studentClass}</span></p>
                   <p class="student-line"><span class="student-label">Stream</span> = <span class="student-value">{note.stream}</span></p>
-                  <p class="student-line"><span class="student-label">{note.studentClass.toLowerCase().includes('college student') ? 'College' : 'School'}</span> = <span class="student-value">{note.school}</span></p>
+                  <p class="student-line"><span class="student-label">{note.studentClass.toLowerCase().includes('college student') ? 'School Passout from' : 'School'}</span> = <span class="student-value">{note.school}</span></p>
                 </div>
               </div>
               <div class="note-tag">Personal Note</div>
